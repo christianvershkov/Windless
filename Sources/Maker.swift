@@ -36,6 +36,7 @@ struct Maker {
                         textLayer.fontSize = label.font.pointSize
                         textLayer.string = label.text
                         textLayer.foregroundColor = label.textColor.cgColor
+                        textLayer.isWrapped = true
                         copy = textLayer
                     } else {
                         copy = CALayer(layer: $0.layer)

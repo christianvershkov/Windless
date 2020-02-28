@@ -29,7 +29,19 @@ struct Maker {
             return container.subviewsHierarchy
                 .filter{ !$0.isWindlessable && $0 != container }
                 .compactMap {
-                    let copy = CALayer(layer: $0.layer)
+                    let copy: CALayer
+                    if let label = $0 as? UILabel {
+                        let textLayer = CATextLayer(layer: label.layer)
+                        textLayer.font = label.font
+                        textLayer.fontSize = label.font.pointSize
+                        textLayer.string = label.text
+                        textLayer.frame = label.convert(label.bounds, to: container)
+                        textLayer.foregroundColor = label.textColor.cgColor
+                        copy = textLayer
+                    } else {
+                        copy = CALayer(layer: $0.layer)
+                    }
+                    
                     copy.contents = $0.layer.contents
                     copy.contentsGravity = $0.layer.contentsGravity
                     copy.backgroundColor = $0.backgroundColor?.cgColor

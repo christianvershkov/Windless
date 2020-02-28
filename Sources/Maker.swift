@@ -61,7 +61,7 @@ extension UIView {
             return []
         } else if let stackView = self as? UIStackView {
             return stackView.arrangedSubviews.flatMap { $0.subviewsHierarchy }
-        }   else {
+        } else {
             return [self] + subviews.flatMap { $0.subviewsHierarchy }
         }
     }

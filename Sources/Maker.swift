@@ -35,7 +35,6 @@ struct Maker {
                         textLayer.font = label.font
                         textLayer.fontSize = label.font.pointSize
                         textLayer.string = label.text
-                        textLayer.frame = label.convert(label.bounds, to: container)
                         textLayer.foregroundColor = label.textColor.cgColor
                         copy = textLayer
                     } else {
@@ -60,8 +59,11 @@ extension UIView {
     var subviewsHierarchy: [UIView] {
         if superview is CanBeMultipleLines {
             return []
-        } else {
+        } else if let stackView = self as? UIStackView {
+            return stackView.arrangedSubviews.flatMap { $0.subviewsHierarchy }
+        }   else {
             return [self] + subviews.flatMap { $0.subviewsHierarchy }
         }
     }
+    
 }

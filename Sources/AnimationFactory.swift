@@ -42,6 +42,7 @@ class AnimationFactory {
         groupAnimation.speed = configuration.speed
         groupAnimation.timingFunction = configuration.timingFuction
         groupAnimation.repeatCount = .infinity
+        groupAnimation.isRemovedOnCompletion = false
         return groupAnimation
     }
 }

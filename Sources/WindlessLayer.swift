@@ -10,7 +10,7 @@ import UIKit
 
 class WindlessLayer: CALayer {
     
-    private var context: WindlessContext
+    private var context: WindlessContext?
     init(frame: CGRect, context: WindlessContext) {
         self.context = context
         super.init()
@@ -22,13 +22,17 @@ class WindlessLayer: CALayer {
         }
     }
     
+    override init(layer: Any) {
+        super.init(layer: layer)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSublayers() {
         super.layoutSublayers()
-        context.updateLayerFrame(bounds)
-        context.updateMask()
+        context?.updateLayerFrame(bounds)
+        context?.updateMask()
     }
 }
